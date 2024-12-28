@@ -22,7 +22,7 @@
 - Uses fewer resources (less space, faster boot time).  
 - Lightweight, but with less isolation compared to VMs.
 
-![Benefits of Docker](DockerBenefits.png)  
+![Benefits of Docker](DockerBenefits1.png)  
 
 ---
 
