@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Beginner Guide</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        h1, h2 {
+            color: #ffcc00;
+        }
+        pre {
+            background-color: #2e2e2e;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            color: #00ffcc;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        a {
+            color: #4caf50;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Docker Beginner Guide</h1>
+
+        <h2>Needs for Docker</h2>
+        <ul>
+            <li>Managing library versions on your OS (Matrix from Hell).</li>
+            <li>Setting up new environments for employees is tedious and requires many commands with precise configurations.</li>
+            <li>Handling smooth operation across various OS (Linux, Windows, etc.) is challenging.</li>
+        </ul>
+
+        <h2>Docker Basics</h2>
+        <p>
+            Docker containers run on the underlying OS. For example, on a Linux system, you can create containers running various Linux distributions (Ubuntu, Fedora, etc.), but not Windows. Docker is not for virtualizing different operating systems. Its purpose is to package applications to run anywhere.
+        </p>
+
+        <h2>Docker vs Virtual Machines</h2>
+        <p>
+            <b>Key Differences:</b>
+        </p>
+        <ul>
+            <li>Docker uses fewer resources, less space, and starts faster.</li>
+            <li>Virtual Machines provide better isolation but are resource-heavy.</li>
+        </ul>
+        <p>
+            <em>(Insert Image 1 and Image 2 Links Here)</em>
+        </p>
+
+        <h2>Docker Commands</h2>
+        <p>Here are essential Docker commands for beginners:</p>
+        <pre><code>docker version</code></pre>
+        <p>Displays the Docker version installed on your system.</p>
+
+        <pre><code>docker run {image_name}</code></pre>
+        <p>Runs a container from the specified image. If the image isn't available locally, it pulls it from Docker Hub.</p>
+
+        <pre><code>docker ps -a</code></pre>
+        <p>Lists all containers, including those that have stopped.</p>
+
+        <pre><code>docker stop {container_name}</code></pre>
+        <p>Stops a running container.</p>
+
+        <pre><code>docker rm {container_name}</code></pre>
+        <p>Removes a stopped container from the system.</p>
+
+        <pre><code>docker images</code></pre>
+        <p>Lists all available Docker images on your system.</p>
+
+        <pre><code>docker rmi {image_name}</code></pre>
+        <p>Removes a Docker image from your system.</p>
+
+        <pre><code>docker pull {image_name}</code></pre>
+        <p>Pulls an image from Docker Hub without running it.</p>
+
+        <h2>Important Notes</h2>
+        <p>
+            Docker containers are designed to run processes, not entire operating systems. If you run a container with a base image (e.g., Ubuntu), it may exit immediately unless a process is specified.
+        </p>
+
+        <h2>Reference</h2>
+        <p>
+            For more information about the official Jenkins Docker image update, visit:
+        </p>
+        <ul>
+            <li><a href="https://www.jenkins.io/blog/2018/12/10/the-official-Docker-image/">Jenkins Blog</a></li>
+            <li><a href="https://hub.docker.com/r/jenkins/jenkins/">Jenkins Docker Hub</a></li>
+        </ul>
+    </div>
+</body>
+</html>
+
