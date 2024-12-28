@@ -18,15 +18,11 @@
   - Example: On Linux, you can create containers for Ubuntu, Fedora, etc., but not for Windows.  
 - Docker uses **LCX-type containers** and focuses on packaging applications, not OS virtualization.  
 
-### Docker vs. Virtual Machines  
-
-![Docker vs Virtual Machines](dockervsvm.png)
-
-#### Benefits of Docker:
+### Benefits of Docker against VM:
 - Uses fewer resources (less space, faster boot time).  
 - Lightweight, but with less isolation compared to VMs.
 
-![Benefits of Docker](benefits.png)  
+![Benefits of Docker](DockerBenefits.png)  
 
 ---
 
