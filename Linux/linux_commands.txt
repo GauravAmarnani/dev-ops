@@ -1,0 +1,32 @@
+ls
+ls -l
+ls -ltr
+mkdir
+pwd
+cd
+rm
+rm -r
+rmdir
+cat
+echo
+echo "" > file
+head -numberOfLinesToPrint
+tail -numberOfLinesToPrint
+head -f
+tail -f
+less
+more
+cp
+mv 
+cp -r
+mv -r
+wc filename
+wc {file1....filen}
+ln 
+ln -s
+cut -b 1-4
+tee
+sort
+clear
+diff file1 file2
+
