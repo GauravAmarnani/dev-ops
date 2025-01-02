@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Run Commands</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: #4caf50;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            font-size: 1.2rem;
+            margin: 5px 0;
+        }
+
+        pre {
+            background-color: #1e1e1e;
+            color: #ffcc00;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 1.5rem;
+            margin: 15px 0;
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+        }
+
+        .note {
+            color: #ffa726;
+            font-style: italic;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Docker Run Commands</h1>
+
+    <p><code>docker run redis</code></p>
+    <p>This will run the container based on the latest redis image. Docker considers latest to be the default tag. If you want to specify a particular version of the redis image you can do so by using:</p>
+
+    <pre><code>docker run redis:4.0</code></pre>
+
+    <p>This is called as TAG.</p>
+
+    <pre><code>./app.sh
+Please enter your name: Gaurav
+
+Hello and Welcome Gaurav!</code></pre>
+
+    <p>If you dockerize this application and run it as a docker container, it wouldn't wait for the prompt. It just prints whatever the application is supposed to print on standard out. That is because by default, the Docker container does not listen to standard input.</p>
+
+    <pre><code>docker run simpleapp
+
+Hello and Welcome!</code></pre>
+
+    <p>Even though you're attached to its console, it is not able to read any input from you. It doesn't have a terminal to read inputs from. It runs in non-interactive mode. If you'd like to provide your input, you must map the standard input of your host to the Docker container using the '-i' parameter. The '-i' parameter is for interactive mode.</p>
+
+    <pre><code>docker run -i simpleapp
+Gaurav
+
+Hello and Welcome Gaurav!</code></pre>
+
+    <p>But there is still something missing from this. The prompt, when we run the app, at first, it asked us for our name. But when dockerized, that prompt is missing, even though it seems to have accepted my input. That is because the application prompt is not on the terminal, and we have not attached to the container's terminal. For this use the '-t' parameter as well. The '-t' stands for pseudo-terminal.</p>
+
+    <pre><code>docker run -it simpleapp
+Please enter your name: Gaurav
+
+Hello and Welcome Gaurav!</code></pre>
+
+    <p>So with the combination of '-i' and '-t' we're now attached to the terminal, as well as the interactive mode on the container.</p>
+
+    <pre><code>docker run -p 5000:8080 springbootapp
+...
+...
+...
+...
+Running the SpringBoot Application {MyDemoApplication.java} on port 8080</code></pre>
+
+    <p>We will now look at port mapping or port publishing on containers. The springbootapp is running on port 8080 inside the container but to be able to access it on your localhost (e.g., 192.18.0.1:5000), use the above command.</p>
+
+    <pre><code>docker run -p 3306:3306 mysql
+# Accessible on 192.18.0.1:3306
+docker run -p 5000:8080 springbootapp
+# Accessible on 192.18.0.1:5000</code></pre>
+
+    <pre><code>docker run mysql
+
+# Add tons of data in the database.
+
+docker stop mysql
+docker rm mysql</code></pre>
+
+    <p>Now all the data is lost with the container. To avoid this, you can use the '-v' parameter so that the data is stored inside a MySQL database that you mention.</p>
+
+    <pre><code>docker run -v /opt/datadir:/var/lib/mysql mysql</code></pre>
+
+    <p>It will mount the database /var/lib/mysql (Docker container directory) -> /opt/datadir (local system directory).</p>
+
+    <pre><code>docker inspect {container_name}</code></pre>
+
+    <p>If you need more information than the information provided by the <code>docker ps</code> command, you can use <code>docker inspect {container_name}</code> to get detailed information about the container in JSON format, such as state, mount, configuration data, network settings, etc.</p>
+
+    <pre><code>docker logs {container_name}</code></pre>
+
+    <p>If you run a container in detached mode using <code>docker run -d {image_name}</code>, then you can view the logs of the container using the logs command.</p>
+
+    <div class="note">
+        <p>Please note that when you're writing content into the HTML file, ensure you copy the exact words from the text file and not shorten them in any way. It is very important.</p>
+    </div>
+</body>
+</html>
