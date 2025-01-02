@@ -1,1 +1,110 @@
+DOCKER RUN COMMANDS: 
+
+> docker run redis
+
+This will run the container based on the latest redis image. Docker considers latest to be the default tag.
+If you want to specify a particular version of the redis image you can do so by using: 
+
+> docker run redis:4.0
+
+This is called as TAG.
+
+
+
+> ./app.sh
+Please enter your name: Gaurav
+
+Hello and Welcome Gaurav! 
+
+# If you dockerize this application and run it as a docker container, it wouldn't wait for the prompt. It just prints whatever the application is supposed to print on standard out. That is because by default, the Docker container does not listen to standard input.
+
+> docker run simpleapp
+
+Hello and Welcome  !
+
+# Even though you're attached to it's console, it is not able to read any input from you. It doesn't have a terminal to read inputs from. it runs in non-interactive mode. If you'd like to provide your input, you must map the standard input of your host to the Docker container using the '-i' parameter. The '-i' parameter is for interactive mode. 
+
+> docker run -i simpleapp
+Gaurav
+
+Hello and Welcome Gaurav!
+
+# And when I input my name, it prints the expected output. But there is something still missing from this. The prompt, when we run the app, at first, it asked us for our name. But when dockerized, that prompt is missing, even though it seems to have accepted my input. That is because the application prompt is not on the terminal, and we have not attached to the container's terminal. For this use '-t' parameter as well. The '-t' stands for psuedo terminal.
+
+> docker run -it simpleapp
+Please enter your name: Gaurav
+
+Hello and Welcome Gaurav! 
+
+# So with the combination of '-i' and '-t' we're now attached to the terminal, as well as the interactive mode on the container.
+
+
+
+> docker run -p 5000:8080 springbootapp
+...
+...
+...
+...
+Running the SpringBoot Application {MyDemoApplication.java} on port 8080
+
+# We will now look at port mapping or port publishing on containers. The springbootapp is running on 8080 port inside the container but to be able to access it on your localhost (192.18.0.1 for example) and on port 5000 so basically 192.18.0.1:5000 we have to use the above command. 
+
+# And similarly we can keep doing this for different containers as well.
+
+For example: 
+> docker run -p 3306:3306 mysql
+# Accessible on 192.18.0.1:3306
+> docker run -p 5000:8080 springbootapp
+# Accessible on 192.18.0.1:5000
+
+
+
+> docker run mysql
+
+# Add tons of data in the database.
+
+> docker stop mysql
+> docker rm mysql
+
+# Now all the data is lost with the container. To avoid this you can use the '-v' parameter so that the data is stored inside a mysql database that you mention.
+
+> docker run -v /opt/datadir:/var/lib/mysql mysql
+
+# It will mount the database /var/lib/mysql (DOCKER CONTAINER DIRECTORY) -> /opt/datadir (LOCAL SYSTEM DIRECTORY).
+
+
+
+> docker inspect {container_name}
+
+# If you need more information than the information provided by the 'docker ps' command, you can use 'docker inspect {container_name} command to get detailed information about the container in the JSON format such as state, mount, configuration data, network settings, etc.
+
+
+
+> docker logs {container_name}
+
+# If you run a container in detached mode using 'docker run -d {image_name}' then you can view the logs of the container using the logs command.
+
+
+
+=============================================================================================================
+
+IMPORTANT INFORMATION:
+
+This is an update for the Jenkins image.
+
+In our upcoming demo video, I used a jenkins image which is now deprecated. Instead of that, we have to use jenkins/jenkins.
+
+In the demo video, I used the command:-
+
+docker run jenkins
+
+But as of now, we have to use the following command:-
+
+docker run jenkins/jenkins
+
+Reference:-
+
+https://www.jenkins.io/blog/2018/12/10/the-official-Docker-image/
+
+https://hub.docker.com/r/jenkins/jenkins/
 
