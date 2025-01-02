@@ -1,1 +1,182 @@
+Needs for docker: 
+
+1. Matrix from Hell (Managing all the versions of your libraries on your OS.
+2. Setting up new environment for new employees is very difficult as each developer had to set their own environment up and it took running hundreds of commands with correct configurations and versions. 
+3. Some developers are comfortable with some OS and the system running smoothly on various OS systems like (Linux, Windows etc) was a big task to handle.
+
+Docker container runs on the underlying OS so if you're running Docker on a Linux System you can create containers running Ubuntu, Debian, Fedora, Arch etc but not a distribution of Windows on the container that is running on a Linux System. 
+
+Docker is a LCX type of Container. 
+
+Docker is not meant to virtualize and run different operating systems and kernals on the same hardware. The main purpose of Docker is to package and containerize applications and to ship them and to run them anywhere, anytime as many times as you want.
+
+Benefits of Docker against VM:
+
+Docker utilizes less resources, it uses less space and it takes a lot less time to boot up. 
+It has less isolation between resources.
+(Image 1)
+
+
+
+DOCKER COMMANDS:
+
+> docker version 
+
+# After installing docker you can get the docker version using this command.
+
+
+
+> docker run {image_name}
+
+# It will run the docker container from an image and it will find the image on the host and it if cannot find it on the host it will go to the docker hub and pull it down. But it is only done one time, for the subsequent executions the same image will be reused.
+
+For example: 
+> docker run nginx
+
+
+
+> docker run --name {container_name} {image_name}
+
+# This command will create the container based on the provided image and name the container what we have provided.
+
+For example:
+> docker run --name database1 mysql
+
+# This command will create a container named database1 with mysql image.
+
+
+
+> docker ps
+
+# Docker PS command lists all the running containers and some basic information such as the container ID, the name of the image we use to run the container, the current status and the name of the container. Each container gets a random ID and a name created for it.
+
+To see all the containers running or not use the -a option. This outputs all running as well as previously stopped or exited containers.
+
+For example:
+> docker ps -a
+
+
+
+> docker stop {container_name}
+
+# To stop a running container use the docker stop command, but you must provide either the container ID or the container name in the stop command. If not sure use the 'docker ps' command to get it. On success, you will see the name printed out and running 'docker ps' will not show the container running anymore. However running 'docker ps -a' will show the container status and that is in exited state a few seconds ago.
+
+For example: 
+> docker stop container_a
+container_a
+
+
+
+> docker rm {container_name}
+
+# Now what if we don't want this container lying around consuming space? We can get rid of it using 'docker rm {container_name}'. After running it the container will be removed and you can check it using 'docker ps -a' command.
+
+For example:
+> docker rm container_a
+container_a
+
+
+
+> docker images
+
+# You can list all the docker images in the system using this command.
+
+
+
+> docker rmi {image_name} 
+
+# You can remove the image from your system using this command. But be careful to delete all the dependent containers on this image before deleting this image.
+
+
+
+> docker pull {image_name}
+
+# Earlier we used 'docker run {image_name} command to run the container from an image. If the image was not present in the host then it was pulled from docker hub, but what if you just wanted to pull the image and not run a container on it directly? You can do it using the 'docker pull {image_name}' command.
+
+For example:
+> docker pull nginx
+
+
+
+* Note:
+
+If you run 'docker run ubuntu' command it will execute and create a container and directly go into exited state as unlike virtual machines the purpose of the containers is to run a process inside them (an application, database, configuration). They are not supposed to run an OS and hence as soon as the container is created it exits and you will find it in the exited state using the 'docker ps -a' command. 
+
+You can use ubuntu to create the base image of your container and then run applications on it. 
+
+
+
+> docker run ubuntu sleep 5
+
+# This will run a container and make it sleep for 5 seconds so it won't get exited for 5 seconds while it's asleep. It is called appending a command, we gave the ubuntu system a command to sleep for 5 seconds after running and so it executes that before exiting.
+
+
+
+
+> docker exec {container_name} {command_to_be_executed_on_container}
+
+# This command can be used to run a command on a running container. 
+
+For example: 
+> docker run ubuntu sleep 100
+
+> docker ps
+CONTAINER ID    IMAGE   COMMAND     CREATED         STATUS          NAMES
+533573bfd       ubuntu  sleep 100   5 seconds ago   Up 4 seconds    ubuntu_container
+
+> docker exec ubuntu_container cat /etc/hosts
+127.0.0.1       localhost
+172.18.0.2      533573bfd
+....
+
+# The above command just executed 'cat /etc/hosts' command inside the running ubuntu container.
+
+
+
+> docker run myspringbootapp
+...
+...
+...
+...
+Running the SpringBoot Application {MyDemoApplication.java} on port 8080
+
+# This command is to show that when you run an application inside the container you are able to see the output of the service you are running. You won't be able to do anything else on this console other than view the output until the Docker Container stops. It won't respond to your inputs. Press Ctrl+C to stop the container and the application to get back to your terminal.
+
+
+
+> docker run -d myspringbootapp
+
+# This command will run the service in DETACH (-d) mode and you can use the terminal and check the running container using 'docker ps' command.
+
+
+
+> docker attach {container_id}
+
+# This command will let you to attach back to your service.
+
+For example:
+> docker run -d myspringbootapp
+
+> docker ps
+CONTAINER ID    IMAGE               COMMAND     CREATED         STATUS          NAMES
+533573bfd       ubuntu              sleep 100   15 seconds ago  Up 14 seconds    ubuntu_container
+0342dfnnf       myspringbootapp                 5 seconds ago   Up 4 seconds    myspringbootapp_container
+
+> docker attach 0342dfnnf
+...
+...
+...
+...
+Running the SpringBoot Application {MyDemoApplication.java} on port 8080
+
+# You can also run
+
+> docker attach 034
+...
+...
+...
+...
+Running the SpringBoot Application {MyDemoApplication.java} on port 8080
+
+# As the container_id starting with 034 is unique, docker will identify the container and you don't have to specify the whole name.
 
